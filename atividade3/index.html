@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        function raiz(n) {
+            var input = document.getElementById('numeroinput');
+            var n = parseInt(input.value);
+            if (isNaN(n) || n <= 0) {
+                alert('Por favor, digite um número válido maior que zero.');
+                return;
+                 var div = document.getElementById('numerosinput');
+                 div.innerHTML = "";
+                 var resultado = Math.sqrt(n);
+                 div.innerHTML = 'A raiz quadrada de ' + n + ' é: ' + resultado;
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>raiz quadrada</title>
+</head>
+<body>
+    <h1><b>Desafio: Raiz Quadrada de N</b></h1>
+<label for="numeroinput">Digite o valor de n:</label>
+<input type="number" id="numeroinput" placeholder="digite um numero" min="1" required>
+<button onclick="escrevern()">escrever</button> <br><br>
+<div id="numerosinput"></div>
+    
+</body>
+</html>

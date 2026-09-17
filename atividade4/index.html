@@ -21,9 +21,50 @@
             }
         }
         function posicaolinguagens() {
-            var indice = prompt('Digite o indice da linguagem que deseja ocultar:');
-            alert('A linguagem que será ocultada é: ' + linguagens[indice]);
+            var indice = prompt('Digite o indice da linguagem que deseja consultar:');
+            alert('A linguagem que será consultada é: ' + linguagens[indice]);
             }
+
+             let frutas = Array();
+
+        frutas[0] = "maca";
+        frutas[1] = "banana";
+        frutas[2] = "uva";
+        frutas[3] = "pera";
+        frutas[4] = "laranja";
+        frutas[5] = "abacaxi";
+        frutas[6] = "manga";
+
+        function mostrarlistafutas() {
+            const container = document.getElementById('minhadiv');   
+            for (let i = 0; i < frutas.length; i++) {
+                var tag = '<h5>' + i + ' - ' + frutas[i] + '</h5>'; 
+                container.innerHTML += tag;
+            }
+        }
+        function posicaofrutas() {
+            var indice = prompt('Digite o indice da fruta que deseja consultar:');
+            alert('A fruta que será consultada é: ' + frutas[indice]);
+            }    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
     </script>
     <meta charset="UTF-8">
@@ -37,7 +78,11 @@
     <button onclick="posicaolinguagens()">posicao no Array</button>
     <div id="minhadiv"></div>
 
+    <h2>Array de frutas</h2>
 
+    <button onclick="mostrarlistafutas()">Criar Array</button> <br><br>
+    <button onclick="posicaofrutas()">posicao no Array</button>
+    <div id="minhadiv"></div>
 
 
 

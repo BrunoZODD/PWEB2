@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+
+        let linguagens = Array();
+
+        linguagens[0] = "dart";
+        linguagens[1] = "PHP";
+        linguagens[2] = "java";
+        linguagens[3] = "python";
+        linguagens[4] = "perl";
+        linguagens[5] = "Ruby on Rails";
+        linguagens[6] = "C ++";
+
+        function mostrarlistalinguagens() {
+            const container = document.getElementById('minhadiv');   
+            for (let i = 0; i < linguagens.length; i++) {
+                var tag = '<h5>' + i + ' - ' + linguagens[i] + '</h5>'; 
+                container.innerHTML += tag;
+            }
+        }
+        function posicaolinguagens() {
+            var indicve = prompt('Digite o indice da linguagem que deseja ocultar:');
+            alert('A linguagem que será ocultada é: ' + linguagens[indicve]);
+            }
+        
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arrays de linguagens</h1>
+
+    <button onclick="mostrarlistalinguagens()">Criar Array</button> <br><br>
+    <div id="minhadiv"></div>
+    <button onclick="posicaolinguagens()">posicao no Array</button>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        let pilhapessoas = Array();
+        function mostrarlista() {
+            const container = document.getElementById('minhadiv');   
+            container.innerHTML = '';
+            
+            for (var i = 0; i < pilhapessoas.length; i++) {
+                var tag = '<h5>' + i + ' - ' + pilhapessoas[i] + '</h5>'; 
+                container.innerHTML += tag;
+            }
+        }
+        function adicionarPessoa() {
+            var pessoa = prompt('Digite o nome da pessoa que deseja adicionar:');
+            pilhapessoas.push(pessoa);
+            mostrarlista();
+        }
+        function posicaoPessoa() {
+            var indice = prompt('Digite o indice da pessoa que deseja consultar:');
+            indice = number(indice);
+            if (indice < 0 || indice >= pilhapessoas.length) {
+                alert('Indice inválido');
+                return;
+            }
+            alert('na posicao' + indice + ' esta a pessoa: ' + pilhapessoas[indice] );
+        }
+        function removerPessoa() {
+           if(pilhapessoas.length === 0) {
+                alert('A pilha está vazia');
+            } else {
+            let removido = pilhapessoas.pop();
+            alert('A pessoa removida foi: ' + removido);
+            mostrarlista();
+            }
+        }
+        function limparPilha() {
+            pilhapessoas = [];
+            mostrarlista();
+        }
+        function inverterPilha() {
+            if (pilhapessoas.length === 0) {
+                alert('A pilha está vazia');
+                return;
+            }
+            pilhapessoas.reverse();
+            mostrarlista();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Pilha de Pessoas</h1>
+
+    <button onclick="adicionarPessoa()">Adicionar Pessoa</button> <br><br>
+    <button onclick="posicaoPessoa()">Consultar Pessoa por Índice</button> <br><br>
+    <button onclick="removerPessoa()">Remover Pessoa</button> <br><br>
+    <button onclick="limparPilha()">Limpar Pilha</button> <br><br>
+    <button onclick="inverterPilha()">Inverter Pilha</button> <br><br>
+    <div id="minhadiv"></div>
+    <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

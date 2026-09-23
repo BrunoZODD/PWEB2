@@ -52,10 +52,14 @@
       margin-top: 15px;
     }
 
-    td {
+    th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
     }
   </style>
 </head>
@@ -86,6 +90,14 @@
   <hr>
 
   <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Ano</th>
+      </tr>
+    </thead>
     <tbody id="listaLivros">
     </tbody>
   </table>
@@ -100,7 +112,7 @@
       livros.forEach((livro, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${index}</td> <!-- Começa no índice 0 -->
+          <td>${index + 1}</td>
           <td>${livro.titulo}</td>
           <td>${livro.autor}</td>
           <td>${livro.ano}</td>
@@ -124,6 +136,7 @@
       }
 
       livros.push({ titulo, autor, ano });
+
       tituloInput.value = '';
       autorInput.value = '';
       anoInput.value = '';

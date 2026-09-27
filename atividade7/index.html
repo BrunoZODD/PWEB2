@@ -33,7 +33,7 @@
                 <label class="form-label">Regime</label>
 
                 <select id="regime" class="form-select">
-                    <option value=""selected disabled hidden>Selecione...</option>
+                    <option value="" selected disabled hidden>Selecione...</option>
                     <option value="Superior">Superior</option>
                     <option value="Medio">Medio</option>
                 </select>
@@ -203,11 +203,31 @@
             cursos[index].nome
         );
 
-        if (novoNome === null || novoNome === "") {
+        if (novoNome === null || novoNome.trim() === "") {
+            return;
+        }
+
+        const novoRegime = prompt(
+            "Digite o novo regime (Superior ou Medio):",
+            cursos[index].regime
+        );
+
+        if (novoRegime === null || novoRegime.trim() === "") {
+            return;
+        }
+
+        const novaCarga = prompt(
+            "Digite a nova carga horária (h):",
+            cursos[index].carga
+        );
+
+        if (novaCarga === null || novaCarga.trim() === "") {
             return;
         }
 
         cursos[index].nome = novoNome;
+        cursos[index].regime = novoRegime;
+        cursos[index].carga = novaCarga;
 
         mostrarCursos();
 

@@ -207,13 +207,29 @@
             return;
         }
 
-        const novoRegime = prompt(
-            "Digite o novo regime (Superior ou Medio):",
-            cursos[index].regime
-        );
+        let novoRegime;
 
-        if (novoRegime === null || novoRegime.trim() === "") {
-            return;
+        while (true) {
+            novoRegime = prompt(
+                "Digite o novo regime (Apenas 'Superior' ou 'Medio'):",
+                cursos[index].regime
+            );
+
+            if (novoRegime === null) {
+                return;
+            }
+
+            const regimeLimpo = novoRegime.trim().toLowerCase();
+
+            if (regimeLimpo === "superior") {
+                novoRegime = "Superior";
+                break;
+            } else if (regimeLimpo === "medio" || regimeLimpo === "médio") {
+                novoRegime = "Medio";
+                break;
+            } else {
+                alert("Opção inválida! Digite apenas 'Superior' ou 'Medio'.");
+            }
         }
 
         const novaCarga = prompt(

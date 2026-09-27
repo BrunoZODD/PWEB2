@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de Cursos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">Cadastro de Cursos</h2>
+
+    <div class="card p-4 mb-3">
+
+        <div class="row">
+
+            <div class="col-md-5">
+                <label class="form-label">Nome do Curso</label>
+                <input type="text"
+                       id="nomeCurso"
+                       class="form-control"
+                       placeholder="Ex: Sistemas de Informação">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Regime</label>
+
+                <select id="regime" class="form-select">
+                    <option value="Presencial">Presencial</option>
+                    <option value="EAD">EAD</option>
+                    <option value="Híbrido">Híbrido</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Carga Horária (h)</label>
+
+                <input type="number"
+                       id="cargaHoraria"
+                       class="form-control"
+                       placeholder="Ex: 1200">
+            </div>
+
+        </div>
+
+        <div class="mt-3">
+            <button class="btn btn-primary" onclick="adicionarCurso()">
+                Adicionar
+            </button>
+        </div>
+
+    </div>
+
+    <div class="mb-2">
+
+        <button class="btn btn-danger" onclick="removerUltimo()">
+            Remover último
+        </button>
+
+        <button class="btn btn-danger" onclick="limparLista()">
+            Limpar
+        </button>
+
+    </div>
+
+
+    <table class="table table-striped table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Regime</th>
+                <th>Carga Horária</th>
+                <th>Ações</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="tabelaCursos"></tbody>
+
+    </table>
+
+</div>
+
+
+<script>
+
+    let cursos = [
+        {
+            nome: "Administração",
+            regime: "Presencial",
+            carga: 1200
+        },
+        {
+            nome: "Engenharia de Software",
+            regime: "Presencial",
+            carga: 2400
+        },
+        {
+            nome: "Sistemas de Computação",
+            regime: "EAD",
+            carga: 1800
+        }
+    ];
+
+
+    function mostrarCursos() {
+
+        const tabela = document.getElementById("tabelaCursos");
+
+        tabela.innerHTML = "";
+
+        cursos.forEach((curso, index) => {
+
+            tabela.innerHTML += `
+                <tr>
+
+                    <td>${index + 1}</td>
+
+                    <td>${curso.nome}</td>
+
+                    <td>${curso.regime}</td>
+
+                    <td>${curso.carga} h</td>
+
+                    <td>
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="alterarCurso(${index})">
+                            Alterar
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="removerCurso(${index})">
+                            Remover
+                        </button>
+
+                    </td>
+
+                </tr>
+            `;
+
+        });
+
+    }
+
+
+    function adicionarCurso() {
+
+        const nome = document.getElementById("nomeCurso").value;
+        const regime = document.getElementById("regime").value;
+        const carga = document.getElementById("cargaHoraria").value;
+
+        if (nome === "" || carga === "") {
+
+            alert("Preencha todos os campos!");
+
+            return;
+        }
+
+        cursos.push({
+            nome: nome,
+            regime: regime,
+            carga: carga
+        });
+
+        mostrarCursos();
+        document.getElementById("nomeCurso").value = "";
+        document.getElementById("cargaHoraria").value = "";
+
+    }
+
+
+    function removerCurso(index) {
+
+        cursos.splice(index, 1);
+
+        mostrarCursos();
+
+    }
+
+    function removerUltimo() {
+
+        if (cursos.length > 0) {
+
+            cursos.pop();
+
+            mostrarCursos();
+
+        }
+
+    }
+
+    function limparLista() {
+
+        cursos = [];
+
+        mostrarCursos();
+
+    }
+
+    function alterarCurso(index) {
+
+        const novoNome = prompt(
+            "Digite o novo nome do curso:",
+            cursos[index].nome
+        );
+
+        if (novoNome === null || novoNome === "") {
+            return;
+        }
+
+        cursos[index].nome = novoNome;
+
+        mostrarCursos();
+
+    }
+
+    mostrarCursos();
+
+</script>
+
+</body>
+</html>

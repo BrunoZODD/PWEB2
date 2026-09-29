@@ -51,7 +51,7 @@
         </div>
 
         <div class="mt-3">
-            <button class="btn btn-primary" onclick="adicionarCurso()">
+            <button class="btn btn-primary" id="btnSalvar" onclick="adicionarOuSalvarCurso()">
                 Salvar
             </button>
         </div>
@@ -97,6 +97,7 @@
 <script>
 
     let cursos = [];
+    let indiceEdicao = null; // Guarda o índice do curso que está a ser editado
 
 
     function mostrarCursos() {
@@ -122,7 +123,7 @@
 
                         <button
                             class="btn btn-secondary btn-sm"
-                            onclick="alterarCurso(${index})">
+                            onclick="carregarParaEdicao(${index})">
                             Alterar
                         </button>
 
@@ -142,27 +143,59 @@
     }
 
 
-    function adicionarCurso() {
+    function adicionarOuSalvarCurso() {
 
         const nome = document.getElementById("nomeCurso").value;
         const regime = document.getElementById("regime").value;
         const carga = document.getElementById("cargaHoraria").value;
 
-        if (nome === "" || carga === "") {
+        if (nome === "" || regime === "" || carga === "") {
 
             alert("Preencha todos os campos!");
 
             return;
         }
 
-        cursos.push({
-            nome: nome,
-            regime: regime,
-            carga: carga
-        });
+        if (indiceEdicao === null) {
+            // Se não houver curso a ser editado, adiciona um novo
+            cursos.push({
+                nome: nome,
+                regime: regime,
+                carga: carga
+            });
+        } else {
+            // Se houver um índice selecionado, atualiza o curso existente
+            cursos[indiceEdicao] = {
+                nome: nome,
+                regime: regime,
+                carga: carga
+            };
+            indiceEdicao = null; // Limpa a variável de edição
+        }
 
+        limparFormulario();
         mostrarCursos();
+
+    }
+
+
+    function carregarParaEdicao(index) {
+
+        // Preenche os campos do formulário com os dados do curso selecionado
+        document.getElementById("nomeCurso").value = cursos[index].nome;
+        document.getElementById("regime").value = cursos[index].regime;
+        document.getElementById("cargaHoraria").value = cursos[index].carga;
+
+        // Guarda o índice do curso que está a ser alterado
+        indiceEdicao = index;
+
+    }
+
+
+    function limparFormulario() {
+
         document.getElementById("nomeCurso").value = "";
+        document.getElementById("regime").value = "";
         document.getElementById("cargaHoraria").value = "";
 
     }
@@ -191,59 +224,6 @@
     function limparLista() {
 
         cursos = [];
-
-        mostrarCursos();
-
-    }
-
-    function alterarCurso(index) {
-
-        const novoNome = prompt(
-            "Digite o novo nome do curso:",
-            cursos[index].nome
-        );
-
-        if (novoNome === null || novoNome.trim() === "") {
-            return;
-        }
-
-        let novoRegime;
-
-        while (true) {
-            novoRegime = prompt(
-                "Digite o novo regime (Apenas 'Superior' ou 'Medio'):",
-                cursos[index].regime
-            );
-
-            if (novoRegime === null) {
-                return;
-            }
-
-            const regimeLimpo = novoRegime.trim().toLowerCase();
-
-            if (regimeLimpo === "superior") {
-                novoRegime = "Superior";
-                break;
-            } else if (regimeLimpo === "medio" || regimeLimpo === "médio") {
-                novoRegime = "Medio";
-                break;
-            } else {
-                alert("Opção inválida! Digite apenas 'Superior' ou 'Medio'.");
-            }
-        }
-
-        const novaCarga = prompt(
-            "Digite a nova carga horária (h):",
-            cursos[index].carga
-        );
-
-        if (novaCarga === null || novaCarga.trim() === "") {
-            return;
-        }
-
-        cursos[index].nome = novoNome;
-        cursos[index].regime = novoRegime;
-        cursos[index].carga = novaCarga;
 
         mostrarCursos();
 

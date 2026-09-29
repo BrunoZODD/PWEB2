@@ -66,7 +66,7 @@
         <button class="btn btn-danger" onclick="limparLista()">
             Limpar
         </button>
-        <button class="btn btn-secondary" id="btnInverter">
+        <button class="btn btn-secondary" onclick="inverterLista()">
             Inverter
         </button>
 
@@ -97,7 +97,7 @@
 <script>
 
     let cursos = [];
-    let indiceEdicao = null; // Guarda o índice do curso que está a ser editado
+    let indiceEdicao = null;
 
 
     function mostrarCursos() {
@@ -157,20 +157,18 @@
         }
 
         if (indiceEdicao === null) {
-            // Se não houver curso a ser editado, adiciona um novo
             cursos.push({
                 nome: nome,
                 regime: regime,
                 carga: carga
             });
         } else {
-            // Se houver um índice selecionado, atualiza o curso existente
             cursos[indiceEdicao] = {
                 nome: nome,
                 regime: regime,
                 carga: carga
             };
-            indiceEdicao = null; // Limpa a variável de edição
+            indiceEdicao = null;
         }
 
         limparFormulario();
@@ -181,12 +179,10 @@
 
     function carregarParaEdicao(index) {
 
-        // Preenche os campos do formulário com os dados do curso selecionado
         document.getElementById("nomeCurso").value = cursos[index].nome;
         document.getElementById("regime").value = cursos[index].regime;
         document.getElementById("cargaHoraria").value = cursos[index].carga;
 
-        // Guarda o índice do curso que está a ser alterado
         indiceEdicao = index;
 
     }
@@ -224,6 +220,14 @@
     function limparLista() {
 
         cursos = [];
+
+        mostrarCursos();
+
+    }
+
+    function inverterLista() {
+
+        cursos.reverse();
 
         mostrarCursos();
 
